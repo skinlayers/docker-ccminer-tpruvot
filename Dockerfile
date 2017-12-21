@@ -26,7 +26,7 @@ RUN set -eux && \
     make -j $(nproc) && \
     make install
 
-FROM nvidia/cuda:9.0-runtime-ubuntu16.04
+FROM nvidia/cuda:9.0-base-ubuntu16.04
 LABEL maintainer="skinlayers@gmail.com"
 
 RUN set -eux && \
@@ -41,7 +41,7 @@ RUN set -eux && \
     rm -r /var/lib/apt/lists/*
 
 COPY --from=ccminer-tpruvot-builder /usr/local/bin/ccminer /usr/local/bin
-COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+COPY ./docker-entrypoint.sh /
 
 RUN chmod 0755 /docker-entrypoint.sh
 

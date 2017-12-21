@@ -29,9 +29,6 @@ RUN set -eux && \
 FROM nvidia/cuda:9.0-runtime-ubuntu16.04
 LABEL maintainer="skinlayers@gmail.com"
 
-ENV P2CLI_VERSION r5
-ENV P2CLI_SHA256 36b9ef23cb8dc443cd64e18e6f8b5c1fcbaf975b54496e9fa9233811bd630c78
-
 RUN set -eux && \
     ADDITIONAL_RUNTIME_DEPENDENCIES=" \
         libcurl3 \

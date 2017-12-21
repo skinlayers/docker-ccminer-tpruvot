@@ -1,5 +1,4 @@
-# Dockerized ccminer
-tpruvot fork
+# Dockerized ccminer - tpruvot's fork
 CUDA 9 branch with GTX 1080, GTX 1070, GTX 1060, et cetera (Compute Capability 6.1) support.
 
 ## Requirements

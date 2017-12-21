@@ -32,5 +32,5 @@ docker stop vivo_bulwarkpool_miner
 
 #### Start existing container
 ```
-docker stop vivo_bulwarkpool_miner
+docker start vivo_bulwarkpool_miner
 ```

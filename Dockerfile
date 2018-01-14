@@ -2,8 +2,8 @@ FROM nvidia/cuda:9.0-devel-ubuntu16.04 as ccminer-tpruvot-builder
 LABEL maintainer="skinlayers@gmail.com"
 
 ENV GIT_URL https://github.com/tpruvot/ccminer.git
-ENV BRANCH cuda-9
-ENV COMMIT_HASH d0a6cb78d3602a913481ace3e012ecfe91ca08b7
+ENV BRANCH linux
+ENV COMMIT_HASH 3761774ccfe63ace4ef4764cb4dea596b0702ec9
 
 RUN set -eux && \
     ADDITIONAL_BUILD_DEPENDENCIES=" \
@@ -20,7 +20,7 @@ RUN set -eux && \
     cd ccminer && \
     git reset --hard $COMMIT_HASH && \
     grep -Eq '^nvcc_ARCH.*-gencode=arch=compute_61,code=\\"sm_61,compute_61\\"$' Makefile.am || \
-    sed -i '/^nvcc_ARCH.*-gencode=arch=compute_52,code=\\"sm_52,compute_52\\"$/a nvcc_ARCH += -gencode=arch=compute_61,code=\\"sm_61,compute_61\\"' Makefile.am && \
+    sed -i '/^#nvcc_ARCH.*-gencode=arch=compute_61,code=\\"sm_61,compute_61\\"$/a nvcc_ARCH += -gencode=arch=compute_61,code=\\"sm_61,compute_61\\"' Makefile.am && \
     ./autogen.sh && \
     ./configure && \
     make -j $(nproc) && \

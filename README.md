@@ -113,3 +113,16 @@ docker stop gbx_gobyte_miner
 ```
 docker start gbx_gobyte_miner
 ```
+
+## Donations
+If you find this useful, feel free to toss some coin my way.
+
+ETH: 0x75F4363b09166FDf8702F41502E90D21A3F2Afb9
+ZEN: znY2eiUwdx9Pj4EzRkktZqRWHfEfX7o9gkW
+FTC: 6nDBmQE65gy7BbcUYbYPttc9EYA7eNKN3g
+ZCL: t1cSvJsEBWCipA4CY9K7oi9sKRQgb3EG76T
+VIVO: VVmjio2zqGgfnvmkEU9bZcxXmFpNswusig
+TZC: Tn6K9mw6bKc8R447CrpeEMazFcve8vEg1a
+LBC: bXp34GVRLnQgTTid9x6nMorHYjq1GzFwz7
+GBX: GTeMA2kehXf2E7DqPGEGVSsb1gQWxpg5Lx
+BTC: 196h6xSrcjEPMf7jRQZbNBQcAB3twDMHE6

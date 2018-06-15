@@ -3,7 +3,7 @@ LABEL maintainer="skinlayers@gmail.com"
 
 ENV GIT_URL https://github.com/tpruvot/ccminer.git
 ENV BRANCH linux
-ENV COMMIT_HASH 3761774ccfe63ace4ef4764cb4dea596b0702ec9
+ENV COMMIT_HASH 07859f93cef68072d8011f3f9a60d443ae11289e
 
 RUN set -eux && \
     ADDITIONAL_BUILD_DEPENDENCIES=" \

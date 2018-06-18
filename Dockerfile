@@ -1,12 +1,10 @@
 FROM nvidia/cuda:9.0-devel-ubuntu16.04 as ccminer-tpruvot-builder
 LABEL maintainer="skinlayers@gmail.com"
 
-ENV GIT_URL https://github.com/tpruvot/ccminer.git
-ENV BRANCH linux
-ENV COMMIT_HASH 07859f93cef68072d8011f3f9a60d443ae11289e
-
-RUN set -eux && \
-    ADDITIONAL_BUILD_DEPENDENCIES=" \
+ARG GIT_URL=https://github.com/tpruvot/ccminer.git
+ARG GIT_BRANCH=linux
+ARG GIT_COMMIT_HASH=07859f93cef68072d8011f3f9a60d443ae11289e
+ARG BUILD_DEPENDENCIES=" \
         automake \
         autotools-dev \
         build-essential \
@@ -14,11 +12,13 @@ RUN set -eux && \
         libcurl4-openssl-dev \
         libssl-dev \
         libjansson-dev \
-    "; \
-    apt-get update && apt-get -y install $ADDITIONAL_BUILD_DEPENDENCIES && \
-    git clone -b "$BRANCH" --single-branch "$GIT_URL" && \
+"
+
+RUN set -eux && \
+    apt-get update && apt-get -y install $BUILD_DEPENDENCIES && \
+    git clone -b "$GIT_BRANCH" --single-branch "$GIT_URL" && \
     cd ccminer && \
-    git reset --hard $COMMIT_HASH && \
+    git reset --hard $GIT_COMMIT_HASH && \
     grep -Eq '^nvcc_ARCH.*-gencode=arch=compute_61,code=\\"sm_61,compute_61\\"$' Makefile.am || \
     sed -i '/^#nvcc_ARCH.*-gencode=arch=compute_61,code=\\"sm_61,compute_61\\"$/a nvcc_ARCH += -gencode=arch=compute_61,code=\\"sm_61,compute_61\\"' Makefile.am && \
     ./autogen.sh && \
@@ -29,15 +29,16 @@ RUN set -eux && \
 FROM nvidia/cuda:9.0-base-ubuntu16.04
 LABEL maintainer="skinlayers@gmail.com"
 
-RUN set -eux && \
-    ADDITIONAL_RUNTIME_DEPENDENCIES=" \
+ARG RUNTIME_DEPENDENCIES=" \
         libcurl3 \
         libgomp1 \
         libjansson4 \
-    "; \
+"
+
+RUN set -eux && \
     adduser --system --home /data --group ccminer && \
     apt-get update && apt-get -y install \
-        $ADDITIONAL_RUNTIME_DEPENDENCIES --no-install-recommends && \
+        $RUNTIME_DEPENDENCIES --no-install-recommends && \
     rm -r /var/lib/apt/lists/*
 
 COPY --from=ccminer-tpruvot-builder /usr/local/bin/ccminer /usr/local/bin
